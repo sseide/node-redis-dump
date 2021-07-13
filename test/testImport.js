@@ -1,3 +1,4 @@
+/* eslint-disable padded-blocks */
 'use strict';
 
 const expect = require('chai').expect;
@@ -14,7 +15,7 @@ describe('Test file import function', function() {
       data: {}
     });
     dump = new RedisDump({client: redis});
-  })
+  });
 
   describe('import from REDIS commands', function() {
 
@@ -37,7 +38,7 @@ describe('Test file import function', function() {
           done();
         }
       });
-    })
+    });
 
     it('import sorted set with ZADD', function(done) {
       const dataStr = 'ZADD rubrics:3:_:relations:articles 1378911643410 "1"\n' +
@@ -59,7 +60,7 @@ describe('Test file import function', function() {
           done();
         }
       });
-    })
+    });
 
     it('import set with SADD', function(done) {
       const dataStr =     'SADD articles:1:_:relations:rubrics "1"\n' +
@@ -81,7 +82,7 @@ describe('Test file import function', function() {
           done();
         }
       });
-    })
+    });
 
     it('import hash with HSET', function(done) {
       const dataStr = 'HSET "hashobj:1" "hashkey" "hashvalue"' +
@@ -101,7 +102,7 @@ describe('Test file import function', function() {
           done();
         }
       });
-    })
+    });
 
     it('import without cleaning db before', function(done) {
       const dataStr1 =   'SET articles:1:desc "DESC"\n' +
@@ -136,7 +137,6 @@ describe('Test file import function', function() {
           });
         }
       });
-    })
-
-  })
-})
+    });
+  });
+});

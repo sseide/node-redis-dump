@@ -1,6 +1,7 @@
+/* eslint-disable padded-blocks */
 'use strict';
 
-const expect = require('chai').expect;
+const {expect} = require('chai');
 const Redis = require('ioredis-mock');
 const RedisDump = require('../lib/node-redis-dump');
 
@@ -10,7 +11,7 @@ describe('Test file export function', function() {
     'string': 'aaa',
     'string:1': 'bbb',
     'string:2': 'ccc',
-    'list:1': ['a','b','c'],
+    'list:1': ['a', 'b', 'c'],
     'list:2': ['x'],
     'hash:1': {
       'key1': 'a',
@@ -28,7 +29,7 @@ describe('Test file export function', function() {
       data: redisData
     });
     dump = new RedisDump({client: redis});
-  })
+  });
 
   describe('export as REDIS strings', function() {
 
@@ -54,8 +55,8 @@ describe('Test file export function', function() {
           expect(dataArr).to.deep.equal(expectData);
           done();
         }
-      })
-    })
+      });
+    });
 
     it('export subpath of strings (2)', function(done) {
       const keyPrefix = 'string:';
@@ -79,8 +80,8 @@ describe('Test file export function', function() {
           expect(dataArr).to.deep.equal(expectData);
           done();
         }
-      })
-    })
+      });
+    });
 
     it('export subpath of list', function(done) {
       const keyPrefix = 'list';
@@ -104,8 +105,8 @@ describe('Test file export function', function() {
           expect(dataArr).to.deep.equal(expectData);
           done();
         }
-      })
-    })
+      });
+    });
 
     it('export subpath of hash', function(done) {
       const keyPrefix = 'hash';
@@ -113,7 +114,7 @@ describe('Test file export function', function() {
         return k.startsWith(keyPrefix);
       }).map((k) => {
         return Object.keys(redisData[k]).map((field) => {
-          return `HSET "${k}" "${field}" "${redisData[k][field]}"`
+          return `HSET "${k}" "${field}" "${redisData[k][field]}"`;
         });
       }).reverse().flat();
 
@@ -131,8 +132,8 @@ describe('Test file export function', function() {
           expect(dataArr).to.deep.equal(expectData);
           done();
         }
-      })
-    })
+      });
+    });
 
     it('export all', function(done) {
       // string and array produce one export command, hash one per field (=2 for each hash in this examples data)
@@ -155,7 +156,7 @@ describe('Test file export function', function() {
           expect(dataArr).to.have.length(expectCount);
           done();
         }
-      })
-    })
-  })
-})
+      });
+    });
+  });
+});
