@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version number (e.g. v0.0.1)'
+        description: 'Version number (e.g. 0.0.1)'
         required: true
 
 jobs:
@@ -27,7 +27,7 @@ jobs:
           cat ~/work/_temp/.npmrc
           npm whoami
           if [ "${{ github.event.inputs.version }}" != "" ]; then
-            npm version "${{ github.event.inputs.version }}"
+            npm --no-git-tag-version version "${{ github.event.inputs.version }}"
           fi
           npm publish --tag latest
         env:
