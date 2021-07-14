@@ -24,9 +24,10 @@ jobs:
       - run: npm test
       - name: check npm login and publish
         run: |
+          cat ~/work/_temp/.npmrc
           npm whoami
           if [ "${{ github.event.inputs.version }}" != "" ]; then
-            npm version "${{ github.event.inputs.name }}"
+            npm version "${{ github.event.inputs.version }}"
           fi
           npm publish --tag latest
         env:
