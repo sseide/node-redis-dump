@@ -24,12 +24,10 @@ jobs:
       - run: npm test
       - name: check npm login and publish
         run: |
-          pwd
-          cat .npmrc || true
           npm whoami
-          if [ "${github.event.inputs.version}" != "" ]; then
-            npm version "${github.event.inputs.name}"
+          if [ "${{ github.event.inputs.version }}" != "" ]; then
+            npm version "${{ github.event.inputs.name }}"
           fi
-          npm publish --tag latest --dry-run
+          npm publish --tag latest
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
