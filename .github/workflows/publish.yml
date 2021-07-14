@@ -22,8 +22,10 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: npm install
       - run: npm test
-      - run: |
-          cat ~/.npmrc
+      - name: check npm login and publish
+        run: |
+          pwd
+          cat .npmrc || true
           npm whoami
           if [ "${github.event.inputs.version}" != "" ]; then
             npm version "${github.event.inputs.name}"
