@@ -24,7 +24,6 @@ jobs:
       - run: npm test
       - name: check npm login and publish
         run: |
-          cat ~/work/_temp/.npmrc
           npm whoami
           if [ "${{ github.event.inputs.version }}" != "" ]; then
             npm --no-git-tag-version version "${{ github.event.inputs.version }}"
