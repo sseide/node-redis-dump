@@ -3,7 +3,7 @@ name: publish-version
 on:
   push:
     tags:
-      - '*'
+      - 'v*'
 
 jobs:
   publish_npm:
@@ -15,6 +15,6 @@ jobs:
           node-version: 12
       - run: npm install
       - run: npm test
-      - run: npm publish --dry-run --tag latest
+      - run: npm publish --tag latest
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
