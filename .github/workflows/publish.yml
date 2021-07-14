@@ -1,0 +1,20 @@
+# actions publish a new version to npm as well as on the github releases page
+name: publish-version
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  publish_npm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 12
+      - run: npm ci
+      - run: npm test
+      - run: npm publish --dry-run --tag latest
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
