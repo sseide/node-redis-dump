@@ -1,6 +1,9 @@
 # actions tests the code with different node LTS versions
 name: npm-test-node-versions
-on: push
+on:
+  push:
+    branches:
+      - "*"
 
 jobs:
   run_test:
