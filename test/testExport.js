@@ -116,7 +116,8 @@ describe('Test file export function', function() {
         return Object.keys(redisData[k]).map((field) => {
           return `HSET "${k}" "${field}" "${redisData[k][field]}"`;
         });
-      }).reverse().flat();
+      }).reverse().reduce((acc, val) => acc.concat(val), []);
+      // flat() only supported from node 11, alternative reduce() to be compatible with older NodeJS
 
       dump.export({
         type: 'redis',
